@@ -17,7 +17,7 @@ def scrape_standings(year):
     try:
         tables = pd.read_html(url)
     except Exception as e:
-        print(f"❌ Failed to read {url}: {e}")
+        print(f"Failed to read {url}: {e}")
         return None
 
     afc_table, nfc_table = None, None
