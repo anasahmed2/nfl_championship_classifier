@@ -225,7 +225,7 @@ This project is for **educational purposes** only. NFL data is property of the N
 
 ## 👤 Author
 
-**Your Name**
+**Anas Ahmed**
 - Project: NFL Championship Prediction System
 - Technology Stack: Python, XGBoost, Scikit-Learn, Pandas, Matplotlib
 
