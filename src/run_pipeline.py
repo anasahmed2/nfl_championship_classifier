@@ -6,6 +6,12 @@ Executes: Data Prep → Model Training → Predictions → Visualizations
 import sys
 import os
 
+# Ensure we're working from project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(PROJECT_ROOT)
+
+print(f"Working directory: {os.getcwd()}")
+
 print("""
 ╔════════════════════════════════════════════════════════════════════╗
 ║                                                                    ║

@@ -5,6 +5,12 @@ Cleans scraped data and adds Super Bowl winner labels
 
 import pandas as pd
 import numpy as np
+import os
+import sys
+
+# Ensure we're working from project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(PROJECT_ROOT)
 
 # Super Bowl winners by season (season = regular season year)
 SUPER_BOWL_WINNERS = {
@@ -52,8 +58,8 @@ def clean_team_name(name):
     return name
 
 
-def prepare_data(input_path='../data/nfl_standings_2005_2024.csv', 
-                 output_path='../data/nfl_ml_ready.csv'):
+def prepare_data(input_path='data/nfl_standings_2005_2024.csv', 
+                 output_path='data/nfl_ml_ready.csv'):
     """
     Load, clean, and prepare NFL data for machine learning.
     

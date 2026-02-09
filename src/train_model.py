@@ -17,6 +17,13 @@ import joblib
 import json
 from datetime import datetime
 import warnings
+import os
+import sys
+
+# Ensure we're working from project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(PROJECT_ROOT)
+
 warnings.filterwarnings('ignore')
 
 from data_preparation import prepare_data, get_feature_columns, create_team_season_features
@@ -252,12 +259,12 @@ class NFLChampionshipPredictor:
             'accuracy': acc
         }
     
-    def plot_feature_importance(self, save_path='../results/feature_importance.png'):
+    def plot_feature_importance(self, save_path='results/feature_importance.png'):
         """
         Plot feature importance from trained model.
         """
         import os
-        os.makedirs('../results', exist_ok=True)
+        os.makedirs('results', exist_ok=True)
         
         importance_df = pd.DataFrame({
             'feature': self.features,
@@ -275,12 +282,12 @@ class NFLChampionshipPredictor:
         
         return importance_df
     
-    def save_model(self, path='../models/championship_model.pkl'):
+    def save_model(self, path='models/championship_model.pkl'):
         """
         Save trained model to disk.
         """
         import os
-        os.makedirs('../models', exist_ok=True)
+        os.makedirs('models', exist_ok=True)
         
         model_data = {
             'model': self.model,
@@ -293,7 +300,7 @@ class NFLChampionshipPredictor:
         print(f"💾 Model saved to {path}")
     
     @classmethod
-    def load_model(cls, path='../models/championship_model.pkl'):
+    def load_model(cls, path='models/championship_model.pkl'):
         """
         Load trained model from disk.
         """
@@ -366,8 +373,8 @@ def main():
     predictor.save_model()
     
     # Save CV results
-    cv_results.to_csv('../results/cv_results.csv', index=False)
-    print("💾 CV results saved to ../results/cv_results.csv")
+    cv_results.to_csv('results/cv_results.csv', index=False)
+    print("💾 CV results saved to results/cv_results.csv")
     
     print("\n" + "=" * 70)
     print("✅ TRAINING COMPLETE!")

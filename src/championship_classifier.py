@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import time
 import os
+import sys
+
+# Ensure we're working from project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(PROJECT_ROOT)
 
 def scrape_standings(year):
     """
@@ -88,10 +93,10 @@ def scrape_all_years(start=2005, end=2024):
     print(f"\n✅ Scraped data for {len(all_data)} seasons ({start}–{end})")
 
     # Ensure the 'data' folder exists
-    os.makedirs("../data", exist_ok=True)
+    os.makedirs("data", exist_ok=True)
 
     # Save combined CSV
-    full_df.to_csv("../data/nfl_standings_2005_2024.csv", index=False)
+    full_df.to_csv("data/nfl_standings_2005_2024.csv", index=False)
     print("💾 Saved to data/nfl_standings_2005_2024.csv")
 
     return full_df

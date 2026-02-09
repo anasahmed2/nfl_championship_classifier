@@ -7,6 +7,13 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
+import sys
+
+# Ensure we're working from project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(PROJECT_ROOT)
+
 from train_model import NFLChampionshipPredictor
 from data_preparation import prepare_data, SUPER_BOWL_WINNERS
 from predict import predict_championship_probabilities
@@ -18,10 +25,10 @@ plt.rcParams['figure.figsize'] = (12, 8)
 plt.rcParams['font.size'] = 10
 
 # Create results directory
-os.makedirs('../results', exist_ok=True)
+os.makedirs('results', exist_ok=True)
 
 
-def plot_win_pct_vs_championship(df, save_path='../results/win_pct_vs_championship.png'):
+def plot_win_pct_vs_championship(df, save_path='results/win_pct_vs_championship.png'):
     """
     Scatter plot: Win Percentage vs Championship Success
     """
@@ -50,7 +57,7 @@ def plot_win_pct_vs_championship(df, save_path='../results/win_pct_vs_championsh
 
 
 def plot_championship_probability_distribution(predictor, df, year=2023, 
-                                                 save_path='../results/prob_distribution.png'):
+                                                 save_path='results/prob_distribution.png'):
     """
     Bar chart: Championship probability distribution for a specific year
     """
@@ -89,7 +96,7 @@ def plot_championship_probability_distribution(predictor, df, year=2023,
     plt.close()
 
 
-def plot_time_series_cv_results(cv_results, save_path='../results/cv_performance.png'):
+def plot_time_series_cv_results(cv_results, save_path='results/cv_performance.png'):
     """
     Line plot: Cross-validation performance over time
     """
@@ -130,7 +137,7 @@ def plot_time_series_cv_results(cv_results, save_path='../results/cv_performance
     plt.close()
 
 
-def plot_feature_importance_detailed(predictor, save_path='../results/feature_importance_detailed.png'):
+def plot_feature_importance_detailed(predictor, save_path='results/feature_importance_detailed.png'):
     """
     Enhanced feature importance visualization
     """
@@ -162,7 +169,7 @@ def plot_feature_importance_detailed(predictor, save_path='../results/feature_im
     plt.close()
 
 
-def plot_champion_characteristics(df, save_path='../results/champion_stats.png'):
+def plot_champion_characteristics(df, save_path='results/champion_stats.png'):
     """
     Box plots comparing champions vs non-champions across key metrics
     """
@@ -196,7 +203,7 @@ def plot_champion_characteristics(df, save_path='../results/champion_stats.png')
     plt.close()
 
 
-def plot_prediction_accuracy_timeline(save_path='../results/prediction_accuracy.png'):
+def plot_prediction_accuracy_timeline(save_path='results/prediction_accuracy.png'):
     """
     Timeline showing prediction accuracy for historical years
     """
@@ -270,7 +277,7 @@ def plot_prediction_accuracy_timeline(save_path='../results/prediction_accuracy.
     return accuracy_df
 
 
-def plot_correlation_heatmap(df, save_path='../results/correlation_heatmap.png'):
+def plot_correlation_heatmap(df, save_path='results/correlation_heatmap.png'):
     """
     Correlation heatmap of key features
     """
@@ -318,7 +325,7 @@ def create_all_visualizations():
     
     # 3. CV performance
     try:
-        cv_results = pd.read_csv('../results/cv_results.csv')
+        cv_results = pd.read_csv('results/cv_results.csv')
         plot_time_series_cv_results(cv_results)
     except FileNotFoundError:
         print("⚠️  CV results not found, skipping CV plot")
@@ -337,7 +344,7 @@ def create_all_visualizations():
     
     print("\n" + "=" * 70)
     print("✅ ALL VISUALIZATIONS COMPLETE!")
-    print("   Check the ../results/ folder for plots")
+    print("   Check the results/ folder for plots")
     print("=" * 70)
 
 

@@ -4,6 +4,13 @@ Quick start guide and examples
 """
 
 import pandas as pd
+import os
+import sys
+
+# Ensure we're working from project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(PROJECT_ROOT)
+
 from train_model import NFLChampionshipPredictor
 from predict import predict_championship_probabilities, compare_predictions_to_actual
 from data_preparation import prepare_data
@@ -19,14 +26,14 @@ print("\n📊 DEMO 1: Model Performance Summary")
 print("-" * 70)
 
 # Load trained model
-predictor = NFLChampionshipPredictor.load_model('../models/championship_model.pkl')
+predictor = NFLChampionshipPredictor.load_model('models/championship_model.pkl')
 
 print("\n✅ Model Details:")
 print(f"   Features used: {len(predictor.features)}")
 print(f"   Best hyperparameters: {predictor.best_params}")
 
 # Load CV results
-cv_results = pd.read_csv('../results/cv_results.csv')
+cv_results = pd.read_csv('results/cv_results.csv')
 
 print("\n📈 Cross-Validation Performance:")
 print(f"   Average Log Loss:    {cv_results['log_loss'].mean():.4f}")
@@ -89,7 +96,7 @@ from predict import predict_championship_probabilities
 from data_preparation import prepare_data
 
 # Load model
-predictor = NFLChampionshipPredictor.load_model('../models/championship_model.pkl')
+predictor = NFLChampionshipPredictor.load_model('models/championship_model.pkl')
 
 # Load data
 df = prepare_data()

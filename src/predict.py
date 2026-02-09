@@ -5,11 +5,18 @@ Uses trained XGBoost model to predict championship probabilities
 
 import pandas as pd
 import numpy as np
+import os
+import sys
+
+# Ensure we're working from project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(PROJECT_ROOT)
+
 from train_model import NFLChampionshipPredictor
 from data_preparation import create_team_season_features
 
 
-def load_current_season_data(csv_path='../data/nfl_standings_2005_2024.csv', year=2024):
+def load_current_season_data(csv_path='data/nfl_standings_2005_2024.csv', year=2024):
     """
     Load data for a specific season to make predictions.
     """
@@ -111,9 +118,9 @@ def predict_future_champion(year=2025):
     
     # Save predictions
     import os
-    os.makedirs('../results', exist_ok=True)
-    results.to_csv(f'../results/predictions_{year}.csv', index=False)
-    print(f"\n💾 Predictions saved to ../results/predictions_{year}.csv")
+    os.makedirs('results', exist_ok=True)
+    results.to_csv(f'results/predictions_{year}.csv', index=False)
+    print(f"\n💾 Predictions saved to results/predictions_{year}.csv")
     
     return results
 
